@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="SUGIARTO COKROWIBOWO @ FOSALGO"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-04-08 01:30:30 AM"/>
+        <attribute name="created" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wNzswMzowNTo1MSBQTTszNzMw"/>
+        <attribute name="edited" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wODswMTozMDozMCBBTTs1NzszODc2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, j" type="Integer" array="False" size=""/>
+            <assign variable="n" expression="12"/>
+            <declare name="data" type="Integer" array="True" size="n"/>
+            <assign variable="data[0]" expression="40"/>
+            <assign variable="data[1]" expression="2"/>
+            <assign variable="data[2]" expression="1"/>
+            <assign variable="data[3]" expression="43"/>
+            <assign variable="data[4]" expression="3"/>
+            <assign variable="data[5]" expression="65"/>
+            <assign variable="data[6]" expression="0"/>
+            <assign variable="data[7]" expression="-1"/>
+            <assign variable="data[8]" expression="68"/>
+            <assign variable="data[9]" expression="3"/>
+            <assign variable="data[10]" expression="42"/>
+            <assign variable="data[11]" expression="4"/>
+            <comment text="Cetak Array Data"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+            <comment text="Memulai Selection Sort"/>
+            <for variable="i" start="0" end="n-2" direction="inc" step="1">
+                <declare name="jMIN" type="Integer" array="False" size=""/>
+                <assign variable="jMIN" expression="i"/>
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="data[j] &lt; data[jMIN]">
+                        <then>
+                            <assign variable="jMIN" expression="j"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+                <if expression="jMIN != i">
+                    <then>
+                        <declare name="temp" type="Integer" array="False" size=""/>
+                        <assign variable="temp" expression="data[i]"/>
+                        <assign variable="data[i]" expression="data[jMIN]"/>
+                        <assign variable="data[jMIN]" expression="temp"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <comment text="Cetak Hasil Sorting"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
