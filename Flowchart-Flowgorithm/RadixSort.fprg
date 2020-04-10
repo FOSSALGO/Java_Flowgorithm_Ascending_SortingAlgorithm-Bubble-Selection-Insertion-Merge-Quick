@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="SUGIARTO COKROWIBOWO"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-04-09 06:01:16 PM"/>
+        <attribute name="created" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wNzswMzowNTo1MSBQTTszNzMw"/>
+        <attribute name="edited" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wOTswNjowMToxNiBQTTs2OTszOTAy"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, j, k, m" type="Integer" array="False" size=""/>
+            <assign variable="n" expression="12"/>
+            <declare name="data" type="Integer" array="True" size="n"/>
+            <assign variable="data[0]" expression="40"/>
+            <assign variable="data[1]" expression="2"/>
+            <assign variable="data[2]" expression="1"/>
+            <assign variable="data[3]" expression="43"/>
+            <assign variable="data[4]" expression="3"/>
+            <assign variable="data[5]" expression="65"/>
+            <assign variable="data[6]" expression="0"/>
+            <assign variable="data[7]" expression="1"/>
+            <assign variable="data[8]" expression="68"/>
+            <assign variable="data[9]" expression="3"/>
+            <assign variable="data[10]" expression="42"/>
+            <assign variable="data[11]" expression="4"/>
+            <comment text="Cetak Array Data"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+            <comment text="Memulai Radix Sort"/>
+            <declare name="MAX" type="Integer" array="False" size=""/>
+            <assign variable="MAX" expression="-99999"/>
+            <comment text="Mencari nilai MAX untuk menentukan level terstinggi apakah satuan, puluhan, ratusan, ribuan, dll"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="data[i] &gt; MAX">
+                    <then>
+                        <assign variable="MAX" expression="data[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <declare name="MAXLEVEL, pembagi, hasilBagi" type="Integer" array="False" size=""/>
+            <assign variable="MAXLEVEL" expression="1"/>
+            <assign variable="pembagi" expression="1"/>
+            <assign variable="hasilBagi" expression="MAX/pembagi"/>
+            <while expression="hasilBagi&gt;=10">
+                <assign variable="MAXLEVEL" expression="MAXLEVEL+1"/>
+                <assign variable="pembagi" expression="pembagi * 10"/>
+                <assign variable="hasilBagi" expression="MAX/pembagi"/>
+            </while>
+            <comment text="memulai penelusuran Radix dan peletakan ke Bucket berdasarkan nilai LSD pada setiap level"/>
+            <assign variable="pembagi" expression="1"/>
+            <declare name="pembagiSisa" type="Integer" array="False" size=""/>
+            <assign variable="pembagiSisa" expression="1"/>
+            <for variable="m" start="1" end="MAXLEVEL" direction="inc" step="1">
+                <assign variable="pembagi" expression="pembagi * 10"/>
+                <comment text="mendeklarasikan Array Bucket dan indexArray Bucket"/>
+                <comment text="ada 10 array bucket dari 0 - 9"/>
+                <declare name="bucket0, bucket1, bucket2, bucket3, bucket4, bucket5, bucket6, bucket7, bucket8, bucket9" type="Integer" array="True" size="n"/>
+                <declare name="index0, index1, index2, index3, index4, index5, index6, index7, index8, index9" type="Integer" array="False" size=""/>
+                <assign variable="index0" expression="0"/>
+                <assign variable="index1" expression="0"/>
+                <assign variable="index2" expression="0"/>
+                <assign variable="index3" expression="0"/>
+                <assign variable="index4" expression="0"/>
+                <assign variable="index5" expression="0"/>
+                <assign variable="index6" expression="0"/>
+                <assign variable="index7" expression="0"/>
+                <assign variable="index8" expression="0"/>
+                <assign variable="index9" expression="0"/>
+                <comment text="memulai peletakan ke bucket"/>
+                <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                    <declare name="value" type="Integer" array="False" size=""/>
+                    <assign variable="value" expression="data[i]"/>
+                    <declare name="sisa" type="Integer" array="False" size=""/>
+                    <assign variable="sisa" expression="value % pembagi"/>
+                    <declare name="posisi" type="Integer" array="False" size=""/>
+                    <assign variable="posisi" expression="sisa / pembagiSisa"/>
+                    <comment text="meletakkan value ke bucket sesuai index posisinya"/>
+                    <if expression="posisi == 0">
+                        <then>
+                            <assign variable="bucket0[index0]" expression="value"/>
+                            <assign variable="index0" expression="index0 + 1"/>
+                        </then>
+                        <else>
+                            <if expression="posisi == 1">
+                                <then>
+                                    <assign variable="bucket1[index1]" expression="value"/>
+                                    <assign variable="index1" expression="index1 + 1"/>
+                                </then>
+                                <else>
+                                    <if expression="posisi == 2">
+                                        <then>
+                                            <assign variable="bucket2[index2]" expression="value"/>
+                                            <assign variable="index2" expression="index2 + 1"/>
+                                        </then>
+                                        <else>
+                                            <if expression="posisi == 3">
+                                                <then>
+                                                    <assign variable="bucket3[index3]" expression="value"/>
+                                                    <assign variable="index3" expression="index3 + 1"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="posisi == 4">
+                                                        <then>
+                                                            <assign variable="bucket4[index4]" expression="value"/>
+                                                            <assign variable="index4" expression="index4 + 1"/>
+                                                        </then>
+                                                        <else>
+                                                            <if expression="posisi == 5">
+                                                                <then>
+                                                                    <assign variable="bucket5[index5]" expression="value"/>
+                                                                    <assign variable="index5" expression="index5 + 1"/>
+                                                                </then>
+                                                                <else>
+                                                                    <if expression="posisi == 6">
+                                                                        <then>
+                                                                            <assign variable="bucket6[index6]" expression="value"/>
+                                                                            <assign variable="index6" expression="index6 + 1"/>
+                                                                        </then>
+                                                                        <else>
+                                                                            <if expression="posisi == 7">
+                                                                                <then>
+                                                                                    <assign variable="bucket7[index7]" expression="value"/>
+                                                                                    <assign variable="index7" expression="index7 + 1"/>
+                                                                                </then>
+                                                                                <else>
+                                                                                    <if expression="posisi ==8">
+                                                                                        <then>
+                                                                                            <assign variable="bucket8[index8]" expression="value"/>
+                                                                                            <assign variable="index8" expression="index8 + 1"/>
+                                                                                        </then>
+                                                                                        <else>
+                                                                                            <if expression="posisi == 9">
+                                                                                                <then>
+                                                                                                    <assign variable="bucket9[index9]" expression="value"/>
+                                                                                                    <assign variable="index9" expression="index9 + 1"/>
+                                                                                                </then>
+                                                                                                <else/>
+                                                                                            </if>
+                                                                                        </else>
+                                                                                    </if>
+                                                                                </else>
+                                                                            </if>
+                                                                        </else>
+                                                                    </if>
+                                                                </else>
+                                                            </if>
+                                                        </else>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </for>
+                <assign variable="pembagiSisa" expression="pembagiSisa * 10"/>
+                <comment text="mengembalikan value ke array data sesuai urutan dari bucket"/>
+                <assign variable="k" expression="0"/>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index0">
+                    <assign variable="data[k]" expression="bucket0[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index1">
+                    <assign variable="data[k]" expression="bucket1[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index2">
+                    <assign variable="data[k]" expression="bucket2[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index3">
+                    <assign variable="data[k]" expression="bucket3[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index4">
+                    <assign variable="data[k]" expression="bucket4[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index5">
+                    <assign variable="data[k]" expression="bucket5[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index6">
+                    <assign variable="data[k]" expression="bucket6[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index7">
+                    <assign variable="data[k]" expression="bucket7[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index8">
+                    <assign variable="data[k]" expression="bucket8[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+                <assign variable="j" expression="0"/>
+                <while expression="j &lt; index9">
+                    <assign variable="data[k]" expression="bucket9[j]"/>
+                    <assign variable="k" expression="k+1"/>
+                    <assign variable="j" expression="j+1"/>
+                </while>
+            </for>
+            <comment text="Cetak Hasil Sorting"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
