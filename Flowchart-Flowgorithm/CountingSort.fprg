@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="SUGIARTO COKROWIBOWO"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-04-09 01:15:58 PM"/>
+        <attribute name="created" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wNzswMzowNTo1MSBQTTszNzMw"/>
+        <attribute name="edited" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wOTswMToxNTo1OCBQTTs2NTszOTA0"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, j" type="Integer" array="False" size=""/>
+            <assign variable="n" expression="12"/>
+            <declare name="data" type="Integer" array="True" size="n"/>
+            <assign variable="data[0]" expression="40"/>
+            <assign variable="data[1]" expression="2"/>
+            <assign variable="data[2]" expression="1"/>
+            <assign variable="data[3]" expression="43"/>
+            <assign variable="data[4]" expression="3"/>
+            <assign variable="data[5]" expression="65"/>
+            <assign variable="data[6]" expression="0"/>
+            <assign variable="data[7]" expression="-1"/>
+            <assign variable="data[8]" expression="68"/>
+            <assign variable="data[9]" expression="3"/>
+            <assign variable="data[10]" expression="42"/>
+            <assign variable="data[11]" expression="4"/>
+            <comment text="Cetak Array Data"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+            <comment text="Memulai Counting Sort"/>
+            <comment text="1. cari nilai MIN dan MAX"/>
+            <declare name="MIN, MAX" type="Integer" array="False" size=""/>
+            <assign variable="MIN" expression="99999"/>
+            <assign variable="MAX" expression="-99999"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="data[i]&gt;MAX">
+                    <then>
+                        <assign variable="MAX" expression="data[i]"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="data[i] &lt; MIN">
+                    <then>
+                        <assign variable="MIN" expression="data[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <comment text="buat array arrCount berukuran (MAX-MIN)+1"/>
+            <declare name="nCount" type="Integer" array="False" size=""/>
+            <assign variable="nCount" expression="MAX - MIN + 1"/>
+            <declare name="arrCount" type="Integer" array="True" size="nCount"/>
+            <comment text="inisialisasi array arrCount"/>
+            <for variable="i" start="0" end="nCount-1" direction="inc" step="1">
+                <assign variable="arrCount[i]" expression="0"/>
+            </for>
+            <comment text="melakukan counting "/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <declare name="value" type="Integer" array="False" size=""/>
+                <assign variable="value" expression="data[i]"/>
+                <assign variable="j" expression="value - MIN"/>
+                <assign variable="arrCount[j]" expression="arrCount[j]+1"/>
+            </for>
+            <comment text="meletakkan hasil counting ke array hasil sorting"/>
+            <declare name="k" type="Integer" array="False" size=""/>
+            <assign variable="k" expression="0"/>
+            <for variable="i" start="0" end="nCount-1" direction="inc" step="1">
+                <if expression="arrCount[i] &gt; 0">
+                    <then>
+                        <declare name="nK" type="Integer" array="False" size=""/>
+                        <assign variable="nK" expression="arrCount[i]"/>
+                        <declare name="value" type="Integer" array="False" size=""/>
+                        <assign variable="value" expression="MIN + i"/>
+                        <for variable="j" start="1" end="nK" direction="inc" step="1">
+                            <assign variable="data[k]" expression="value"/>
+                            <assign variable="k" expression="k+1"/>
+                        </for>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <comment text="Cetak Hasil Sorting"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
