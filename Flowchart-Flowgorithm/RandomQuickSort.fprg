@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="SUGIARTO COKROWIBOWO @ FOSALGO"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2020-04-11 04:15:10 PM"/>
+        <attribute name="created" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0wNzswMzowNTo1MSBQTTszNzMw"/>
+        <attribute name="edited" value="RkFLVUxUQVNfVEVLTklLX1ZEMTtERVNLVE9QLTUyTEszQzQ7MjAyMC0wNC0xMTswNDoxNToxMCBQTTszNjszODg2"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, i, j, k" type="Integer" array="False" size=""/>
+            <assign variable="n" expression="12"/>
+            <declare name="data" type="Integer" array="True" size="n"/>
+            <assign variable="data[0]" expression="40"/>
+            <assign variable="data[1]" expression="2"/>
+            <assign variable="data[2]" expression="1"/>
+            <assign variable="data[3]" expression="43"/>
+            <assign variable="data[4]" expression="3"/>
+            <assign variable="data[5]" expression="65"/>
+            <assign variable="data[6]" expression="0"/>
+            <assign variable="data[7]" expression="-1"/>
+            <assign variable="data[8]" expression="68"/>
+            <assign variable="data[9]" expression="3"/>
+            <assign variable="data[10]" expression="42"/>
+            <assign variable="data[11]" expression="4"/>
+            <comment text="Cetak Array Data"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+            <comment text="Memulai Quick Sort"/>
+            <call expression="quickSort(data, 0, n-1)"/>
+            <comment text="Cetak Hasil Sorting"/>
+            <output expression="&quot;[ &quot;" newline="False"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="&quot;  &quot;&amp;data[i]" newline="False"/>
+            </for>
+            <output expression="&quot;  ]&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="partisi" type="Integer" variable="indexPartisi">
+        <parameters>
+            <parameter name="data" type="Integer" array="True"/>
+            <parameter name="low" type="Integer" array="False"/>
+            <parameter name="high" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="indexPartisi" type="Integer" array="False" size=""/>
+            <declare name="pivot, i, j, temp, indexPivot, interval" type="Integer" array="False" size=""/>
+            <assign variable="interval" expression="high-low"/>
+            <assign variable="indexPivot" expression="low+Random(interval)"/>
+            <assign variable="pivot" expression="data[indexPivot]"/>
+            <comment text="set nilai pivot tetap diposisi high untuk memudahkan iterasi :)"/>
+            <assign variable="temp" expression="data[indexPivot]"/>
+            <assign variable="data[indexPivot]" expression="data[high]"/>
+            <assign variable="data[high]" expression="temp"/>
+            <comment text="memulai partisi Array"/>
+            <assign variable="i" expression="low-1"/>
+            <for variable="j" start="low" end="high-1" direction="inc" step="1">
+                <if expression="data[j] &lt; pivot">
+                    <then>
+                        <assign variable="i" expression="i+1"/>
+                        <comment text="tukar data pada index i dan j"/>
+                        <assign variable="temp" expression="data[i]"/>
+                        <assign variable="data[i]" expression="data[j]"/>
+                        <assign variable="data[j]" expression="temp"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <comment text="tukar data pada index i+1 dan high"/>
+            <assign variable="temp" expression="data[i+1]"/>
+            <assign variable="data[i+1]" expression="data[high]"/>
+            <assign variable="data[high]" expression="temp"/>
+            <assign variable="indexpartisi" expression="1+i"/>
+        </body>
+    </function>
+    <function name="quickSort" type="None" variable="">
+        <parameters>
+            <parameter name="data" type="Integer" array="True"/>
+            <parameter name="low" type="Integer" array="False"/>
+            <parameter name="high" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <if expression="low &lt; high">
+                <then>
+                    <declare name="indexPartisi" type="Integer" array="False" size=""/>
+                    <assign variable="inDexPartisi" expression="partisi(data, low, high)"/>
+                    <call expression="quickSort(data, low, indexPartisi-1)"/>
+                    <call expression="quickSort(data, indexPartisi+1, high)"/>
+                </then>
+                <else/>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
